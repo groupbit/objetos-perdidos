@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient;
 const HOST = process.env.MONGO_HOST || 'localhost'
 const PORT = process.env.MONGO_PORT || 27017
 var url = `mongodb://${HOST}:${PORT}`
-var dbname = 'mydb'
+var dbname = 'objetos-Perdidos'
 var db
 
 
