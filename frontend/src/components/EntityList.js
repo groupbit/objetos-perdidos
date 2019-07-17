@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'reactstrap';
 
 const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
 const API_PORT = process.env.REACT_APP_API_PORT || 8888;
@@ -24,7 +25,7 @@ class EntityList extends React.Component {
       var columns = Object.entries(this.state.entities[0]).map(entry => entry[0])
       return (
         <div className="EntityList">
-          <table className="table">
+          <Table className="table" striped>
             <thead>
               <tr>
                 {this.renderHeaders(columns)}
@@ -33,7 +34,7 @@ class EntityList extends React.Component {
             <tbody>
               {this.renderRows(columns)}
             </tbody>
-          </table>
+          </Table>
         </div>
       );
     }
