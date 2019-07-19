@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import EntityList from './components/EntityList'
+import ObjetosPerdidosList from './components/ObjetosPerdidosList'
 import {BrowserRouter as Router, Route, Switch, Redirect, NavLink as Link} from "react-router-dom"
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
 function ObjetosPerdidosComponent() {
-  return (<EntityList entity="objetosPerdidos"/>)
+  return (<ObjetosPerdidosList objetos="objetosPerdidos"/>)
 }
 
 function App() {

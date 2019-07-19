@@ -1,38 +1,41 @@
 import React from 'react';
 import { Table } from 'reactstrap';
+import ObjetoPerdidoRow from './ObjetoPerdidoRow'
 
 const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
 const API_PORT = process.env.REACT_APP_API_PORT || 8888;
 
 const API_URL = `//${API_HOST}:${API_PORT}`;
 
-class EntityList extends React.Component {
+class ObjetosPerdidosList extends React.Component {
 
     constructor(props) {
       super(props);
-      this.state= { entities: []}
+      this.state= { objetosPerdidos: []}
     }
 
     componentWillMount() {
-      fetch(`${API_URL}/${this.props.entity}`)
+      fetch(`http://localhost:8888/objetosPerdidos`)
         .then( res => res.json())
-        .then( entities => this.setState({entities: entities}));
+        .then( prds => this.setState({objetosPerdidos: prds, selected: ''}));
     }
 
     render() {
-      if(this.state.entities.length > 0) {
-        //uso el primero para conocer los atributos
-      var columns = Object.entries(this.state.entities[0]).map(entry => entry[0])
+      if(this.state.objetosPerdidos.length > 0) {
       return (
-        <div className="EntityList">
+        <div className="objetosPerdidosCSS">
+          <h2>Objetos Perdidos</h2>
           <Table className="table" striped>
             <thead>
               <tr>
-                {this.renderHeaders(columns)}
+                <th>Fecha de ingreso</th>
+                <th>Detalles</th>
+                <th>Lugar perdido/encontrado</th>
+                <th>Perdido/Encontrado</th>
               </tr>
             </thead>
             <tbody>
-              {this.renderRows(columns)}
+              {this.renderRows()}
             </tbody>
           </Table>
         </div>
@@ -51,23 +54,14 @@ class EntityList extends React.Component {
       })
     }
 
-    renderRows(columns) {
-      return this.state.entities.map((object, index) => {
+    renderRows() {
+      return this.state.objetosPerdidos.map((unObjetoPerdido, index) => {
         return (
-          <tr key={object._id}>
-            {this.renderRow(object, columns)}
-          </tr>
+          <ObjetoPerdidoRow objetoPerdido={unObjetoPerdido} />
         );
       })
     }
-
-    renderRow(object, columns,) {
-      return columns.map((attName, index) => {
-          return (<td>{object[attName]}</td>);
-      });
-    }
+  
   }
 
-
-
-export default EntityList
+export default ObjetosPerdidosList
