@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import EntityList from './components/EntityList'
+import EntityList from './components/ObjetosPerdidosList'
 import {BrowserRouter as Router, Route, Switch, Redirect, NavLink as Link} from "react-router-dom"
 import { Nav, NavItem, NavLink } from 'reactstrap';
 

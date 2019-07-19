@@ -7,7 +7,7 @@ const API_PORT = process.env.REACT_APP_API_PORT || 8888;
 
 const API_URL = `//${API_HOST}:${API_PORT}`;
 
-class EntityList extends React.Component {
+class ObjetosPerdidosList extends React.Component {
 
     constructor(props) {
       super(props);
@@ -24,7 +24,7 @@ class EntityList extends React.Component {
       if(this.state.objetosPerdidos.length > 0) {
       return (
         <div className="objetosPerdidosCSS">
-          <h2>{this.props.titulo}</h2>
+          <h2>Objetos Perdidos</h2>
           <Table className="table" striped>
             <thead>
               <tr>
@@ -64,4 +64,4 @@ class EntityList extends React.Component {
   
   }
 
-export default EntityList
+export default ObjetosPerdidosList

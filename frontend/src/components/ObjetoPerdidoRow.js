@@ -1,17 +1,19 @@
 import React from 'react';
 
-class ProductoRow extends React.Component {
+var moment = require('moment');
+
+class ObjetoPerdidoRow extends React.Component {
 
     render() {      
         return(
-            <tr key={this.props.objetoPerdido._id} >
-              <td>{this.props.objetoPerdido.fechaIngresado}</td>
+            <tr>
+              <td>{moment(this.props.objetoPerdido.fechaIngresado).format('YYYY-M-DD')}</td>
               <td>{this.props.objetoPerdido.descripcion}</td>
               <td>{this.props.objetoPerdido.lugar}</td>
-              <td>{this.props.objetoPerdido.estado}</td>
+              <td>{this.props.objetoPerdido.estado ? "Perdido" : "Encontrado" }  </td>
           </tr>)
       
     }
 }
 
-  export default ProductoRow
+  export default ObjetoPerdidoRow
