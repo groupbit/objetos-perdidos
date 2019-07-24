@@ -5,9 +5,10 @@ class ObjetoPerdidoForm extends React.Component{
     constructor(props){
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {objetoPerdido:props.objetoPerdido}
-        //this.estadoInicial = this.estadoInicial.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.state = {objetoPerdido:props.objetoPerdido}
+        this.estadoInicial = this.estadoInicial.bind(this);
+        
     }
 
     componentWillReceiveProps(props){
@@ -18,6 +19,8 @@ class ObjetoPerdidoForm extends React.Component{
       var newObjetoPerdido = Object.assign({}, this.state.objetoPerdido);
         newObjetoPerdido[event.target.name] = event.target.value;
         this.setState({objetoPerdido: newObjetoPerdido});
+        const target = event.target;
+        newObjetoPerdido[event.target.name] = target.type === 'checkbox' ? target.checked : target.value;
     }
 
     handleSubmit(event) {
@@ -34,7 +37,7 @@ class ObjetoPerdidoForm extends React.Component{
       fetch('http://localhost:8888/objetosPerdidos', {
           method: 'PUT',
           headers: {
-              'Accept': 'application/json, text/plain, */*',
+              'Accept': 'application/json, text/plain,*/*',
               'Content-Type': 'application/json'
           },
           body: JSON.stringify(this.state.objetoPerdido)
@@ -57,31 +60,36 @@ class ObjetoPerdidoForm extends React.Component{
     }
 
     estadoInicial() {
-        this.setState({fechaIngresado: new Date() , objetoPerdido : { descripcion: "", lugar: "", estado: true } });
+        this.setState({fechaIngresado: new Date() , objetoPerdido : { descripcion: "", lugar: "", estado: false } });
     }
     
-    
-    
-
     render() {
         return (
           <div class="container" >
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="descripcion">Descripcion</Label>
-              <Input type= "text" name="descripcion" placeholder="llaves" value={this.state.objetoPerdido.descripcion} onChange={this.handleChange}/>
+              <Input type= "text" name="descripcion" placeholder="objeto" value={this.state.objetoPerdido.descripcion} onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup>
               <Label for="lugar">Lugar Perdido/Encontrado</Label>
               <Input type="text" name="lugar" placeholder="lugar" value={this.state.objetoPerdido.lugar} onChange={this.handleChange}/>
             </FormGroup>
-            <FormGroup>
+            <FormGroup >
+            <Label for="estado">Perdido</Label>
+            <input
+            name="estado"
+            type="checkbox"
+            checked={this.state.objetoPerdido.estado}
+            onChange={this.handleChange}></input>
+          </FormGroup>
+            {/* <FormGroup>
               <Label for="estado">Perdido/Encontrado</Label>
-              <Input type="select" name="estado" value={this.state.objetoPerdido.estado} onChange={this.handleChange} >
-                <option value="false">"Encontrado"</option>
-                <option value="true" >"Perdido"</option>                
-              </Input>
-            </FormGroup>
+              <select type={Boolean} name="estado" value={this.state.objetoPerdido.estado} onChange={this.handleChange}  >
+                <option value={("false")}>"Encontrado"</option>
+                <option value={("true")}>"Perdido"</option>                
+              </select>
+            </FormGroup> */}
             <Button type="submit" value="submit">Cargar</Button>
           </Form>
           </div>
