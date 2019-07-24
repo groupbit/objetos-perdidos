@@ -39,7 +39,7 @@ class ObjetoPerdidoForm extends React.Component{
           },
           body: JSON.stringify(this.state.objetoPerdido)
       }).then(res => this.props.objetoPerdidoChange(this.state.objetoPerdido))
-        //.then(this.estadoInicial);
+        .then(this.estadoInicial);
 
     }
 
@@ -56,9 +56,9 @@ class ObjetoPerdidoForm extends React.Component{
   
     }
 
-    // estadoInicial() {
-    //     this.setState({fechaIngresado: new Date() , objetoPerdido : { descripcion: "", lugar: "", estado: "" } });
-    // }
+    estadoInicial() {
+        this.setState({fechaIngresado: new Date() , objetoPerdido : { descripcion: "", lugar: "", estado: true } });
+    }
     
     
     
@@ -76,10 +76,10 @@ class ObjetoPerdidoForm extends React.Component{
               <Input type="text" name="lugar" placeholder="lugar" value={this.state.objetoPerdido.lugar} onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup>
-              <Label for="Estado">Perdido/Encontrado</Label>
-              <Input type="select" name="estado" value={this.state.objetoPerdido.estado} onChange={this.handleChange}>
-                <option value={true}>"Encontrado"</option>
-                <option value={false}>"Perdido"</option>                
+              <Label for="estado">Perdido/Encontrado</Label>
+              <Input type="select" name="estado" value={this.state.objetoPerdido.estado} onChange={this.handleChange} >
+                <option value="false">"Encontrado"</option>
+                <option value="true" >"Perdido"</option>                
               </Input>
             </FormGroup>
             <Button type="submit" value="submit">Cargar</Button>
