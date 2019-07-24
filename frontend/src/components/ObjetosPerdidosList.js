@@ -19,9 +19,7 @@ class ObjetosPerdidosList extends React.Component {
     }
 
     componentWillMount() {
-      fetch(`http://localhost:8888/objetosPerdidos`)
-        .then( res => res.json())
-        .then( prds => this.setState({objetosPerdidos: prds}));
+      this.listado();
     }
 
     render() {
@@ -81,7 +79,9 @@ class ObjetosPerdidosList extends React.Component {
       this.setState({objetosPerdidos: newObjetosPerdidos, selected:unObjetoPerdido})
     }
     listado(){
-      this.componentWillMount();
+      fetch(`http://localhost:8888/objetosPerdidos`)
+        .then( res => res.json())
+        .then( prds => this.setState({objetosPerdidos: prds}));
     }
   }
 
