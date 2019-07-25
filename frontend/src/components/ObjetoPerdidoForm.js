@@ -4,9 +4,9 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class ObjetoPerdidoForm extends React.Component{
     constructor(props){
         super(props)
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.state = {objetoPerdido:props.objetoPerdido}
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.estadoInicial = this.estadoInicial.bind(this);
         
     }
