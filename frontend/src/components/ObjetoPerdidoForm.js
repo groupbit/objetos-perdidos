@@ -4,9 +4,9 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class ObjetoPerdidoForm extends React.Component{
     constructor(props){
         super(props)
-        this.state = {objetoPerdido:props.objetoPerdido}
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {objetoPerdido:props.objetoPerdido}
         this.estadoInicial = this.estadoInicial.bind(this);
         
     }
@@ -17,11 +17,9 @@ class ObjetoPerdidoForm extends React.Component{
     
     handleChange(event){
       var newObjetoPerdido = Object.assign({}, this.state.objetoPerdido);
-        newObjetoPerdido[event.target.name] = event.target.value;
-        
-        const target = event.target;
-        newObjetoPerdido[event.target.name] = target.type === 'checkbox' ? target.checked : target.value;
-        this.setState({objetoPerdido: newObjetoPerdido});
+      const target = event.target;
+      newObjetoPerdido[target.name] = target.type === 'checkbox' ? target.checked : target.value;
+      this.setState({objetoPerdido: newObjetoPerdido});
     }
 
     handleSubmit(event) {
@@ -84,7 +82,7 @@ class ObjetoPerdidoForm extends React.Component{
             checked={this.state.objetoPerdido.estado}
             onChange={this.handleChange}></input>
           </FormGroup>
-            <Button type="submit">Cargar</Button>
+            <Button type="submit" value="submit">Cargar</Button>
           </Form>
           </div>
         );
