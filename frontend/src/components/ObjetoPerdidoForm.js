@@ -17,10 +17,10 @@ class ObjetoPerdidoForm extends React.Component{
     
     handleChange(event){
       var newObjetoPerdido = Object.assign({}, this.state.objetoPerdido);
-        newObjetoPerdido[event.target.name] = event.target.value;
-        this.setState({objetoPerdido: newObjetoPerdido});
-        const target = event.target;
-        newObjetoPerdido[event.target.name] = target.type === 'checkbox' ? target.checked : target.value;
+      const target = event.target;
+      newObjetoPerdido[target.name] = target.value;
+      newObjetoPerdido[target.name] = target.type === 'checkbox' ? target.checked : target.value;
+      this.setState({objetoPerdido: newObjetoPerdido});
     }
 
     handleSubmit(event) {
@@ -83,13 +83,6 @@ class ObjetoPerdidoForm extends React.Component{
             checked={this.state.objetoPerdido.estado}
             onChange={this.handleChange}></input>
           </FormGroup>
-            {/* <FormGroup>
-              <Label for="estado">Perdido/Encontrado</Label>
-              <select type={Boolean} name="estado" value={this.state.objetoPerdido.estado} onChange={this.handleChange}  >
-                <option value={("false")}>"Encontrado"</option>
-                <option value={("true")}>"Perdido"</option>                
-              </select>
-            </FormGroup> */}
             <Button type="submit" value="submit">Cargar</Button>
           </Form>
           </div>
