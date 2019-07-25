@@ -18,7 +18,6 @@ class ObjetoPerdidoForm extends React.Component{
     handleChange(event){
       var newObjetoPerdido = Object.assign({}, this.state.objetoPerdido);
       const target = event.target;
-      newObjetoPerdido[target.name] = target.value;
       newObjetoPerdido[target.name] = target.type === 'checkbox' ? target.checked : target.value;
       this.setState({objetoPerdido: newObjetoPerdido});
     }
