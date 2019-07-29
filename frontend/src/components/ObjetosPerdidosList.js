@@ -32,7 +32,6 @@ class ObjetosPerdidosList extends React.Component {
             objetoPerdido={this.state.selected}
             objetoPerdidoChange={this.state.objetoPerdidoChange}
             listado ={this.listado}
-            actualizarListaDeObjetos = {this.actualizarListaDeObjetos}
           />
           
           <Table className="table" striped>
