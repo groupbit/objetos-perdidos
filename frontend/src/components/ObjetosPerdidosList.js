@@ -16,6 +16,7 @@ class ObjetosPerdidosList extends React.Component {
       this.select = this.select.bind(this);
       this.listado =this.listado.bind(this);
       this.objetoPerdidoChange=this.objetoPerdidoChange.bind(this);
+      this.actualizarListaDeObjetos=this.actualizarListaDeObjetos.bind(this);
     }
 
     componentWillMount() {
@@ -67,7 +68,9 @@ class ObjetosPerdidosList extends React.Component {
         return (
           <ObjetoPerdidoRow
            objetoPerdido={unObjetoPerdido}
-           selector={this.select} />
+           selector={this.select} 
+           actualizarListaDeObjetos={this.actualizarListaDeObjetos}
+           />
         );
       })
     }
@@ -82,6 +85,12 @@ class ObjetosPerdidosList extends React.Component {
       fetch(`http://localhost:8888/objetosPerdidos`)
         .then( res => res.json())
         .then( prds => this.setState({objetosPerdidos: prds}));
+    }
+    actualizarListaDeObjetos(unObjetoPerdido) {
+      var objetoPerdidoActualizado = this.state.objetosPerdidos.filter(
+        item => unObjetoPerdido._id !== item._id
+      );
+      this.setState({ objetosPerdidos: objetoPerdidoActualizado });
     }
   }
 
