@@ -30,7 +30,7 @@ class ObjetosPerdidosList extends React.Component {
           <h2>Objetos Perdidos</h2>
           <ObjetoPerdidoForm
             objetoPerdido={this.state.selected}
-            objetoPerdidoChange={this.state.objetoPerdidoChange}
+            objetoPerdidoChange={this.objetoPerdidoChange}
             listado ={this.listado}
           />
           
