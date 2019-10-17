@@ -35,6 +35,9 @@ class ObjetoPerdidoRow extends React.Component {
               <td>{this.props.objetoPerdido.descripcion}</td>
               <td>{this.props.objetoPerdido.lugar}</td>
               <td>{this.props.objetoPerdido.estado ? "Perdido" : "Encontrado" }  </td>
+              <td><Button color="danger" onClick={() => {
+                  this.handleSubmit(this.props.objetoPerdido._id);
+                  }}>Borrar</Button></td>
           </tr>)
       
     }

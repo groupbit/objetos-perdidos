@@ -82,6 +82,15 @@ class ObjetoPerdidoForm extends React.Component{
             checked={this.state.objetoPerdido.estado}
             onChange={this.handleChange}></input>
           </FormGroup>
+          <FormGroup >
+            <Label for="archivado">Archivar</Label>
+            <input
+            name="archivado"
+            type="checkbox"
+            checked={this.state.objetoPerdido.archivado}
+            onChange={this.handleChange}></input>
+          </FormGroup>
+
             <Button type="submit" value="submit">Cargar</Button>
           </Form>
           </div>

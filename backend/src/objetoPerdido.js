@@ -7,6 +7,7 @@ class ObjetoPerdido {
         this.descripcion = descripcion;
         this.lugar = lugar;
         this.estado = perdido;
+        this.archivado = false;
     }
 }
 
