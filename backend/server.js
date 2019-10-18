@@ -27,12 +27,12 @@ function init() {
 
   server.use(cors())
 
-  server.get("/:type", (req, res) => {
-    home = homes[req.params.type]
-    home.all((allObjects) => {
-        res.json(allObjects)
-        res.end() })
-  })
+  // server.get("/:type", (req, res) => {
+  //   home = homes[req.params.type]
+  //   home.find((allObjects) => {
+  //       res.json(allObjects)
+  //       res.end() })
+  // })
 
   server.get("/:type/:id", (req, res) => {
     home = homes[req.params.type]
@@ -40,6 +40,41 @@ function init() {
       res.json(myObject)
       res.end() })
   })
+
+  server.get("/:type", (req, res) => {
+    var query = {}
+    if (req.query.turno) {
+      console.log(`Query farmacias: ${req.query.turno}`)
+      var deTurno = (req.query.turno == "true")
+      query = {"archivado" : deTurno }
+    }
+    home = homes["objetosPerdidos"]
+    home.find(query,
+      (allObjects) => {
+        res.json(allObjects) 
+        res.end()
+      })         
+  })
+
+  server.get("/:type", (req, res) => {
+    var query = {}
+    if (req.query.turno) {
+      console.log(`Query farmacias: ${req.query.turno}`)
+      var deTurno = (req.query.turno == "false")
+      query = {"archivado" : deTurno }
+    }
+    home = homes["objetosPerdidos"]
+    home.find(query,
+      (allObjects) => {
+        res.json(allObjects) 
+        res.end()
+      })         
+  })
+
+
+
+
+ 
 
   server.put("/:type", (req, res) => {
     home = homes[req.params.type]

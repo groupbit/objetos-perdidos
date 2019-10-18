@@ -46,6 +46,13 @@ class MongoDBHome {
         })
     }
 
+    find(query, callback) {
+        this.persistentCollection.find(query).toArray( (error, result)=>{
+            if(error) throw error
+            callback(result)
+        })
+    }
+
 }
 
 module.exports = MongoDBHome

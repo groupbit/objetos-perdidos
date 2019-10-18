@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import ObjetoPerdidoRow from './ObjetoPerdidoRow'
-import ObjetoPerdidoForm from './ObjetoPerdidoForm'
+import ObjetoPerdidoArchivadoRow from './ObjetoPerdidoArchivadoRow'
 
 const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
 const API_PORT = process.env.REACT_APP_API_PORT || 8888;
@@ -14,25 +13,23 @@ class ObjetosPerdidosList extends React.Component {
       super(props);
       this.state= { objetosPerdidos: [],selected:{}}
       this.select = this.select.bind(this);
-      this.listado =this.listado.bind(this);
-      this.objetoPerdidoChange=this.objetoPerdidoChange.bind(this);
+    
       this.actualizarListaDeObjetos=this.actualizarListaDeObjetos.bind(this);
     }
 
-    componentWillMount() {
-      this.listado();
+    
+
+    componentWillMount(){
+      fetch(`http://localhost:8888/objetosPerdidos?turno=true`)
+        .then( res => res.json())
+        .then( prds => this.setState({objetosPerdidos: prds}));
     }
 
     render() {
       if(this.state.objetosPerdidos.length > 0) {
       return (
         <div className="objetosPerdidosCSS">
-          <h2>Objetos Perdidos</h2>
-          <ObjetoPerdidoForm
-            objetoPerdido={this.state.selected}
-            objetoPerdidoChange={this.objetoPerdidoChange}
-            listado ={this.listado}
-          />
+          <h2>Objetos Perdidos Archivados</h2>
           
           <Table className="table" striped>
             <thead>
@@ -66,7 +63,7 @@ class ObjetosPerdidosList extends React.Component {
     renderRows() {
       return this.state.objetosPerdidos.map((unObjetoPerdido, index) => {
         return (
-          <ObjetoPerdidoRow
+          <ObjetoPerdidoArchivadoRow
            objetoPerdido={unObjetoPerdido}
            selector={this.select} 
            actualizarListaDeObjetos={this.actualizarListaDeObjetos}
@@ -77,17 +74,11 @@ class ObjetosPerdidosList extends React.Component {
     select(unObjetoPerdido){
       this.setState({selected:unObjetoPerdido})
     }
-    objetoPerdidoChange(unObjetoPerdido) {
-      this.listado();
-    }
-    listado(){
-      fetch(`http://localhost:8888/objetosPerdidos?turno=false`)
-        .then( res => res.json())
-        .then( prds => this.setState({objetosPerdidos: prds}));
-    }
+  
+
     actualizarListaDeObjetos(unObjetoPerdido) {
       var objetoPerdidoActualizado = this.state.objetosPerdidos.filter(
-        item => unObjetoPerdido._id !== item._id && unObjetoPerdido.archivado === false
+        item => unObjetoPerdido._id !== item._id
       );
       this.setState({ objetosPerdidos: objetoPerdidoActualizado });
     }
